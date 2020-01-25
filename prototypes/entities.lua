@@ -86,6 +86,8 @@ railpicturesinternal = function(elems)
   return res
 end
 
+local hit_effects = require ("__base__/prototypes/entity/demo-hit-effects")
+
 data:extend({
   {
     type = "straight-rail",
@@ -93,19 +95,25 @@ data:extend({
     icon = "__concreted-rails__/graphics/icons/concrete-straight-rail.png",
     flags = {"placeable-neutral", "player-creation", "building-direction-8-way"},
     minable = {mining_time = 0.5, result = "concrete-rail"},
-    max_health = 100,
+    max_health = 300,
     corpse = "straight-rail-remnants",
+    dying_explosion = "rail-explosion",
     resistances =
     {
       {
         type = "fire",
         percent = 100
+      },
+      {
+        type = "acid",
+        percent = 80
       }
     },
     collision_box = {{-0.7, -0.8}, {0.7, 0.8}},
     selection_box = {{-0.7, -0.8}, {0.7, 0.8}},
     rail_category = "regular",
     pictures = railpictures(),
+    damaged_trigger_effect = hit_effects.wall(),
     icon_size = 32
   },
   {
@@ -114,20 +122,39 @@ data:extend({
     icon = "__concreted-rails__/graphics/icons/concrete-curved-rail.png",
     flags = {"placeable-neutral", "player-creation", "building-direction-8-way"},
     minable = {mining_time = 0.5, result = "concrete-rail", count = 4},
-    max_health = 200,
+    max_health = 600,
     corpse = "curved-rail-remnants",
+    dying_explosion =
+    {
+      {
+        name = "rail-explosion",
+        offset = {0.9, 2.2}
+      },
+      {
+        name = "rail-explosion"
+      },
+      {
+        name = "rail-explosion",
+        offset = {-1.2, -2}
+      }
+    },
     resistances =
     {
       {
         type = "fire",
         percent = 100
-      }
+      },
+      {
+        type = "acid",
+        percent = 80
+      },
     },
     collision_box = {{-0.75, -0.55}, {0.75, 1.6}},
     secondary_collision_box = {{-0.65, -2.43}, {0.65, 2.43}},
     selection_box = {{-1.7, -0.8}, {1.7, 0.8}},
     rail_category = "regular",
     pictures = railpictures(),
+    damaged_trigger_effect = hit_effects.wall(),
     placeable_by = { item="concrete-rail", count = 4},
     icon_size = 32
   },

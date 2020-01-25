@@ -14,14 +14,14 @@ data:extend({
     prerequisites = {"railway", "concrete"},
     unit =
     {
-      count = 50,
+      count = 75,
       ingredients =
       {
         {"automation-science-pack", 1},
         {"logistic-science-pack", 1},
       },
-      time = 20
+      time = 30
     },
-    order = "c-g-a",
+    order = "c-g-a-m",
   },
 })
